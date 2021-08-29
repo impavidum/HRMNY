@@ -1,0 +1,26 @@
+.editor {
+  // display: flex;
+  height: 97%;
+  .editor-title {
+    display: flex;
+    align-items: center;
+    height: 10%;
+    color: white;
+    text-align: center;
+    background: rgba(256, 256, 256, 0.03);
+    h2 {
+        opacity: .7;
+        font-weight: normal;
+        width: 100%;
+        margin: 0;
+    }
+  }
+  .editor-body {
+    width: 300px;
+    height: 90%;
+    padding: 0 15px;
+    .buttons {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,83 @@
+@import "../../../scss/colors";
+
+.menu-component {
+  display: inline-block;
+  float: right;
+  height: 25px;
+  //   flex: 1;
+  //   margin-right: 10px;
+  //   margin-top: 13px;
+  z-index: 997;
+  .overlay {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    background: transparent;
+    &.show {
+      display: block !important;
+    }
+  }
+  svg {
+    cursor: pointer;
+    float: right;
+    margin: 3px 10px;
+  }
+  .dropdown {
+    z-index: 9998;
+    position: absolute;
+    right: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(49, 49, 51, 1);
+    border-radius: 2px;
+    li {
+      cursor: pointer;
+      padding: 10px 10px;
+      color: lighten($ltgrey, 50%);
+      font-size: 14px;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+  .edit-buttons {
+    float: right;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .menu-component {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 6px 0;
+    .edit-buttons {
+      align-self: center;
+      width: 60%;
+      display: flex;
+      justify-content: center;
+    }
+    svg {
+      float: none;
+      margin: 0;
+    }
+    .dropdown {
+      top: 74px;
+      right: unset;
+      transform: translateX(-35px);
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .menu-component {
+    width: 100%;
+    margin: 3px 0;
+  }
+}

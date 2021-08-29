@@ -1,0 +1,192 @@
+
+type Dashboard {
+  id: ID! @id
+  name: String! @unique
+  groupings: [Grouping!]! @relation(name: "GroupingToDashboard", onDelete: CASCADE)
+}
+
+type Grouping {
+  id: ID! @id
+  title: String
+  subtitle: String
+  dashboard: Dashboard! @relation(name: "GroupingToDashboard")
+  chips: [String] @scalarList(strategy:RELATION)
+  cards: [Card!]! @relation(name: "CardToGrouping", onDelete: CASCADE)
+  layoutLGs: [LayoutLG!]! @relation(name: "LayoutLGToGrouping" onDelete: CASCADE)
+  layoutMDs: [LayoutMD!]! @relation(name: "LayoutMDToGrouping" onDelete: CASCADE)
+  layoutSMs: [LayoutSM!]! @relation(name: "LayoutSMToGrouping" onDelete: CASCADE)
+  layoutXSs: [LayoutXS!]! @relation(name: "LayoutXSToGrouping" onDelete: CASCADE)
+}
+
+type Card {
+  id: ID! @id
+  cardType: CardType
+  title: String
+  layoutLG: LayoutLG! @relation(name: "LayoutLGToCard", onDelete: CASCADE, link: TABLE)
+  layoutMD: LayoutMD! @relation(name: "LayoutMDToCard", onDelete: CASCADE, link: TABLE)
+  layoutSM: LayoutSM! @relation(name: "LayoutSMToCard", onDelete: CASCADE, link: TABLE)
+  layoutXS: LayoutXS! @relation(name: "LayoutXSToCard", onDelete: CASCADE, link: TABLE)
+  grouping: Grouping! @relation(name: "CardToGrouping")
+}
+
+type LayoutLG {
+  id: ID! @id
+  x: Int!
+  y: Int!
+  w: Int!
+  h: Int!
+  card: Card! @relation(name: "LayoutLGToCard")
+  grouping: Grouping! @relation(name: "LayoutLGToGrouping")
+}
+
+type LayoutMD {
+  id: ID! @id
+  x: Int!
+  y: Int!
+  w: Int!
+  h: Int!
+  card: Card! @relation(name: "LayoutMDToCard")
+  grouping: Grouping! @relation(name: "LayoutMDToGrouping")
+}
+
+type LayoutSM {
+  id: ID! @id
+  x: Int!
+  y: Int!
+  w: Int!
+  h: Int!
+  card: Card! @relation(name: "LayoutSMToCard")
+  grouping: Grouping! @relation(name: "LayoutSMToGrouping")
+}
+
+type LayoutXS {
+  id: ID! @id
+  x: Int!
+  y: Int!
+  w: Int!
+  h: Int!
+  card: Card! @relation(name: "LayoutXSToCard")
+  grouping: Grouping! @relation(name: "LayoutXSToGrouping")
+}
+
+type Entity {
+  id: ID! @id
+  entityID: String @unique
+  name: String @unique
+  linkForEntity: String
+  type: EntityType
+  source: Source!
+  parent: Entity @relation(name: "EntityToEntity")
+  items: [Item!]! @relation(name: "ItemToEntity")
+}
+
+
+type Item {
+  id: ID! @id
+  type: ItemType @default(value: UNKNOWN)
+  alertID: Int @unique
+  logID: String @unique
+  triggerTime: String!
+  name: String
+  message: String
+  level: Level @default(value: UNKNOWN)
+  source: Source @default(value: ORION)
+  trigger: Entity! @relation(name: "ItemToEntity")
+  hour: Hour! @relation(name: "ItemToHour")
+  day: Day! @relation(name: "ItemToDay")
+}
+
+type Year {
+  id: ID! @id
+  value: Int! @unique
+  quarters: [Quarter!]! @relation(name: "QuarterToYear", onDelete: CASCADE)
+  months: [Month!]! @relation(name: "MonthToYear", onDelete: CASCADE)
+  weeks: [Week!]! @relation(name: "WeekToYear", onDelete: CASCADE)
+}
+
+type Quarter {
+  id: ID! @id
+  value: Int!
+  quarterYear: String! @unique
+  year: Year! @relation(name: "QuarterToYear")
+  days: [Day!]! @relation(name: "DayToQuarter", onDelete: CASCADE)
+}
+
+type Month {
+  id: ID! @id
+  value: Int!
+  monthYear: String! @unique
+  year: Year! @relation(name: "MonthToYear")
+  days: [Day!]! @relation(name: "DayToMonth", onDelete: CASCADE)
+}
+
+type Week {
+  id: ID! @id
+  value: Int!
+  weekYear: String! @unique
+  year: Year! @relation(name: "WeekToYear")
+  days: [Day!]! @relation(name: "DayToWeek", onDelete: CASCADE)
+}
+
+type Day {
+  id: ID! @id
+  value: Int
+  dayMonthYear: String! @unique
+  year: Year! @relation(name: "DayToYear")
+  quarter: Quarter! @relation(name: "DayToQuarter")
+  week: Week! @relation(name: "DayToWeek")
+  month: Month! @relation(name: "DayToMonth")
+  hours: [Hour!]! @relation(name: "HourToDay", onDelete: CASCADE)
+  items: [Item!]! @relation(name: "ItemToDay", onDelete: CASCADE)
+}
+
+type Hour {
+  id: ID! @id
+  value: Int! 
+  hourDayMonthYear: String! @unique
+  day: Day! @relation(name: "HourToDay")
+  items: [Item!]! @relation(name: "ItemToHour", onDelete: CASCADE)
+}
+
+enum Level {
+    CRITICAL
+    INFORMATIONAL
+    NOTICE
+    SERIOUS
+    WARNING
+    ALERT 
+    EMERGENCY
+    ERROR
+    NOTICE
+    UNKNOWN
+  }
+
+enum ItemType {
+  ALERT
+  TRAP
+  SYSLOG
+  WINDOWSEVENT
+  VMWAREEVENT
+  UNKNOWN
+}
+
+enum Source {
+  ORION
+  SPLUNK
+  OTHER
+}
+
+enum EntityType {
+  NODE 
+  INTERFACE
+}
+
+enum CardType {
+  MONTHBAR
+  WEEKDENSITY
+  WEEKBAR
+  FILTER
+  TRIGGERLIST
+  STACKEDSEVERITY
+}
+

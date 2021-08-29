@@ -1,0 +1,77 @@
+@import "../../../scss/colors";
+
+.grouping-header {
+  display: block;
+  height: auto;
+  width: calc(100% - 140px);
+  margin: 0 70px;
+  z-index: 9998;
+  //   margin-right: 15px;
+  //   margin-bottom: 5px;
+  // padding: 5px 5px 0 5px;
+  padding: 0;
+  font-size: 16px;
+  text-transform: uppercase;
+  .header {
+    color: lighten($ltgrey, 50%);
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+  }
+  .header-input {
+    display: inline-block;
+    margin-right: 15px;
+    input {
+      text-transform: uppercase;
+      outline: none;
+      border: none;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 5px 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      background-color: #2c2c2e;
+      color: lighten($ltgrey, 50%);
+      // color: $ltgrey;
+      // -webkit-box-shadow: inset 0px 0px 8px -3px rgba(0, 0, 0, 1);
+      // -moz-box-shadow: inset 0px 0px 8px -3px rgba(0, 0, 0, 1);
+      // box-shadow: inset 0px 0px 8px -3px rgba(0, 0, 0, 1);
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .grouping-header {
+    display: flex;
+    flex-direction: column;
+    .header {
+      align-self: center;
+      width: 60%;
+      text-align: center;
+      padding: 5px 0;
+    }
+    .header-input {
+      align-self: center;
+      width: 60%;
+      margin-right: 0;
+      input {
+        width: 100%;
+        padding: 7px 10px;
+        margin: 3px 0;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grouping-header {
+    .header {
+      width: 100%;
+      .header-input {
+        width: 100%;
+      }
+    }
+  }
+}

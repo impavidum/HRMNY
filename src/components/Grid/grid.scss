@@ -1,0 +1,10 @@
+@import '../../scss/colors';
+
+.react-grid-layout {
+    min-width: 3105px !important;
+    padding: 0;
+    // padding: 0 50px;
+    .react-grid-item {
+        z-index: 998 !important;
+    }
+}

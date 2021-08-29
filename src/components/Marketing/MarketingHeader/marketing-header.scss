@@ -1,0 +1,54 @@
+@import '../../../scss/colors';
+@import '../../../scss/variables';
+
+.marketing-header {
+    height: 100vh;
+    background: linear-gradient(to bottom, #1A1B1D, rgba(0,0,0,0));
+//    background: #1A1B1D;
+// background: transparent;
+    .logo {
+        width: 30%;
+        max-width: 200px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .tagline {
+        color: lighten($ltgrey,10%);
+        font-weight: normal;
+        font-size: 1.1rem;
+        position: absolute;
+        bottom: 25%;
+        width: 80%;
+        margin: 0 10%;
+        text-align: center;
+        span {
+            color: lighten($ltgrey, 30%);
+        }
+    }
+    #down {
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: $mdgrey;
+        font-size: 35px;
+        cursor: pointer;
+    }
+    .bar {
+        width: 35px;
+        height: 5px;
+        border-radius: 5px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10px;
+        background: #1A1B1D;
+        @media screen and (max-width: $break-sm) {
+            display: none;
+          }
+    }
+   
+    
+}

@@ -1,0 +1,86 @@
+@import '../../../scss/variables';
+
+.stacked-bar {
+    // height: 450px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    // Desktop
+    .chart-desktop {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0px;
+        border-radius: 5px;
+    }
+
+
+    // Mobile
+    .chart-mobile {
+        @extend .chart-desktop;
+        display: none;
+    }
+
+    // Mobile 2
+    .chart-mobile2 {
+        @extend .chart-desktop;
+        display: none;
+    }
+
+    // Mobile 3
+    .chart-mobile3 {
+        @extend .chart-desktop;
+        display: none;
+    }
+
+    // @media screen and (max-width: 1029px) {
+    //     height: auto;
+    //     min-height: 900px;
+    //     .chart-mobile {
+    //         display: block !important;
+    //     }
+    //     .chart-desktop {
+    //         display: none;
+    //     }
+    // }
+
+    @media screen and (min-width: 1029px) and (max-width: 1232px) {
+        .chart-mobile2 {
+            display: block !important;
+        }
+        .chart-mobile, .chart-mobile3, .chart-desktop {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 816px) and (max-width: 1028px) {
+        .chart-mobile {
+            display: block !important;
+            position: relative;
+            height: 900px;
+            left: unset;
+        }
+        .chart-desktop, .chart-mobile3, .chart-mobile2 {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 460px) and (max-width: 815px) {
+        .chart-mobile2 {
+            display: block !important;
+        }
+        .chart-mobile, .chart-mobile3, .chart-desktop {
+            display: none;
+        }
+    }
+   
+    @media screen and (max-width: 459px) {
+        .chart-mobile3 {
+            display: block !important;
+        }
+        .chart-mobile, .chart-mobile2, .chart-desktop {
+            display: none;
+        }
+    }
+}

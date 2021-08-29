@@ -1,0 +1,362 @@
+
+type Query {
+  dashboard(where: DashboardWhereUniqueInput): Dashboard!
+  monthBar(where: MonthBarWhereInput): MonthBar!
+  weekDensity(where: weekDensityWhereInput): WeekDensity!
+  weekSeverity(where: weekSeverityWhereInput): WeekSeverity!
+  filter(where: FilterWhereInput): Filter!
+  getEntities(where: EntityWhereInput): [EntityListItem!]!
+  weekBar(where: WeekBarWhereInput): WeekBar!
+  getItems(where: GetItemsWhereInput): [Item!]!
+  getItemCount(where: GetItemCountWhereInput): Int!
+  getEntityCount(where: GetEntityCountWhereInput): Int!
+}
+
+type Mutation {
+  createGrouping(data: createGroupingInput): success!
+  updateGrouping(data: updateGroupingInput): success!
+  deleteGrouping(data: ID): success!
+}
+
+type success {
+  success: Boolean
+}
+
+type EntityListItem {
+  name: String, 
+  count: Int
+}
+
+input createGroupingInput {
+  title: String
+  subtitle: String
+  cards: [CardInput]
+  chips: [String]
+}
+
+input CardInput {
+  title: String,
+  cardType: CardType
+  layoutLG: LayoutInput,
+  layoutMD: LayoutInput,
+  layoutSM: LayoutInput,
+  layoutXS: LayoutInput
+}
+
+input LayoutInput {
+  x: Int,
+  y: Int,
+  w: Int,
+  h: Int,
+}
+
+input updateGroupingInput {
+  id: ID
+  title: String
+  chips: [String]
+}
+
+input deleteGroupingInput {
+  id: ID
+}
+
+input GetItemsWhereInput {
+  first: Int!
+  skip: Int!
+  startDate: String!
+  endDate: String!
+  levels: [Level!]!
+  types: [ItemType!]!
+  entities: [String!]!,
+  orderBy: String!
+}
+
+input GetItemCountWhereInput {
+  startDate: String!
+  endDate: String!
+  levels: [Level!]!
+  types: [ItemType!]!
+  entities: [String!]!
+}
+
+input GetEntityCountWhereInput {
+  startDate: String!
+  endDate: String!
+  levels: [Level!]!
+  types: [ItemType!]!
+  entities: [String!]!
+}
+
+input EntityWhereInput {
+  first: Int!
+  skip: Int!
+  startDate: String
+  endDate: String
+  levels: [Level!]!
+  types: [ItemType!]!
+  entities: [String!]!
+}
+
+input FilterWhereInput {
+  startDate: String
+  endDate: String
+  levels: [Level!]!
+  types: [ItemType!]!
+  entities: [String!]!
+}
+
+input WeekBarWhereInput {
+  weekYear: String!
+  levels: [Level!]!
+  type: String!
+  entities: [String!]!
+}
+
+type WeekBar {
+  items: [Int!]!
+}
+
+type MonthSeries {
+  alerts: [Int!]!
+  traps: [Int!]!
+  syslogs: [Int!]!
+  winEvents: [Int!]!
+  vmwEvents: [Int!]!
+}
+
+type MonthBar {
+  xAxis: [String!]!
+  series: MonthSeries!
+  max: Int
+}
+
+input MonthBarWhereInput {
+  monthYear: String!
+  levels: [Level!]!
+  types: [ItemType!]!
+  entities: [String!]!
+}
+
+type WeekDensity {
+  itemDensity: [[Int]!]!
+  max: Int!
+}
+
+input weekDensityWhereInput {
+  weekYear: String!
+  levels: [Level!]!
+  types: [ItemType!]!
+  entities: [String!]!
+}
+
+type Severity { 
+  critical: [Int], 
+  informational: [Int],  
+  notice: [Int], 
+  serious: [Int],
+  warning: [Int],
+  emergency: [Int],
+  alert: [Int],
+  error: [Int],
+  unknown: [Int]
+  }
+
+type WeekSeverity {
+  series: Severity
+}
+
+input weekSeverityWhereInput {
+  weekYear: String!
+  levels: [Level!]!
+  types: [ItemType!]!
+  entities: [String!]!
+}
+
+type Filter {
+    entities: [String!]!
+    
+}
+
+# ------------------------------- Dashboards ------------------------------- #
+
+type Dashboard {
+  id: ID!
+  name: String!
+  groupings: [Grouping!]!
+  user: User!
+}
+
+type User {
+  id: ID!
+  dashboards: [Dashboard!]!
+  name: String!
+  email: String!
+  password: String!
+}
+
+type Grouping {
+  id: ID!
+  title: String
+  subtitle: String
+  dashboard: Dashboard! 
+  cards: [Card!]!
+  chips: [String]
+  layoutLGs: [LayoutLG!]!
+  layoutMDs: [LayoutMD!]!
+  layoutSMs: [LayoutSM!]!
+  layoutXSs: [LayoutXS!]!
+}
+
+type Card {
+  id: ID! 
+  cardType: CardType
+  title: String
+  layoutLG: LayoutLG!
+  layoutMD: LayoutMD!
+  layoutSM: LayoutSM!
+  layoutXS: LayoutXS!
+  grouping: Grouping! 
+}
+
+type LayoutLG {
+  id: ID! 
+  x: Int!
+  y: Int!
+  w: Int!
+  h: Int!
+  card: Card!
+  gouping: Grouping!
+}
+
+type LayoutMD {
+  id: ID! 
+  x: Int!
+  y: Int!
+  w: Int!
+  h: Int!
+  card: Card!
+  grouping: Grouping!
+}
+
+type LayoutSM {
+  id: ID! 
+  x: Int!
+  y: Int!
+  w: Int!
+  h: Int!
+  card: Card!
+  grouping: Grouping!
+}
+
+type LayoutXS {
+  id: ID! 
+  x: Int!
+  y: Int!
+  w: Int!
+  h: Int!
+  card: Card!
+  grouping: Grouping!
+}
+
+# Inputs
+input DashboardWhereUniqueInput {
+  id: ID
+  name: String
+}
+
+# Enums
+enum CardType {
+  MONTHBAR
+  WEEKDENSITY
+  WEEKBAR
+  FILTER
+  TRIGGERLIST
+  STACKEDSEVERITY
+}
+
+# type Day {
+#   id: ID!
+#   value: Int
+#   dayMonthYear: String!
+#   year: Year!
+#   quarter: Quarter!
+#   week: Week!
+#   month: Month!
+#   hours: [Hour!]
+#   items: [Item!]
+# }
+
+# type Hour {
+#   id: ID!
+#   value: Int!
+#   hourDayMonthYear: String!
+#   day: Day!
+#   items: [Item!]
+# }
+
+# ------------------------------- Data ------------------------------- #
+
+type Entity {
+  id: String!
+  entityID: String
+  name: String
+  linkForEntity: String
+  type: EntityType
+  source: Source!
+  parent: Entity
+  items: [Item!]!
+}
+
+type Item {
+  id: String!
+  type: ItemType
+  alertID: Int
+  logID: String
+  triggerTime: String!
+  name: String
+  message: String
+  level: Level
+  source: Source
+  trigger: Entity!
+  # hour: Hour!
+  # day: Day!
+}
+
+# Enums
+enum Level {
+    CRITICAL
+    INFORMATIONAL
+    NOTICE
+    SERIOUS
+    WARNING
+    ALERT 
+    EMERGENCY
+    ERROR
+    UNKNOWN
+  }
+
+enum Source {
+  ORION
+  SPLUNK
+}
+
+enum EntityType {
+  NODE 
+  INTERFACE
+}
+
+enum ItemType {
+  ALERT
+  TRAP
+  SYSLOG
+  WINDOWSEVENT
+  VMWAREEVENT
+  UNKNOWN
+}
+
+
+
+
+
+
+

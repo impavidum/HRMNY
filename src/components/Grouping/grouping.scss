@@ -1,0 +1,91 @@
+@import "../../scss/colors";
+
+.grouping {
+  .title {
+    z-index: 9999;
+    height: auto;
+    width: 100%;
+    font-weight: 500;
+    margin: 10px 30px 0 30px;
+    color: white;
+    flex: 1;
+    .date-range {
+      display: inline-block;
+      // For Mobile
+      @media screen and (max-width: 520px) {
+        display: block !important;
+        // margin-top: 3px;
+      }
+    }
+    .edit-btn {
+      float: right;
+      color: transparent;
+      transition: 200ms ease-in-out;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+
+  .grouping-body {
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+    height: 650px;
+    padding: 0 30px;
+    margin: 0 !important;
+  }
+
+  .background {
+    margin-top: 54px;
+    .transparent {
+      padding: 10px 0;
+      background: rgba($neutral, 0.15);
+    }
+  }
+  // &.good {
+  //     .heading {
+  //         color: $good;
+  //     }
+  //     .subheading {
+  //         color: $good;
+  //     }
+  //     .transparent {
+  //         background: rgba($good, .15);
+  //     }
+  // }
+  // &.fair {
+  //     .heading {
+  //         color: $fair;
+  //     }
+  //     .subheading {
+  //         color: $fair;
+  //     }
+  //     .transparent {
+  //         background: rgba($fair, .15);
+  //     }
+  // }
+  // &.poor {
+  //     .heading {
+  //         color: $poor;
+  //     }
+  //     .subheading {
+  //         color: $poor;
+  //     }
+  //     .transparent {
+  //         background: rgba($poor, .15);
+  //     }
+  // }
+  &:hover {
+    .title {
+      .edit-btn {
+        color: darken($muted, 20%);
+        &:hover {
+          color: $muted;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,347 @@
+@import "../../../scss/colors";
+
+.date-picker {
+  //   position: relative;
+  // margin-left: 8px;
+  display: inline-block;
+  .overlay {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    &.show {
+      display: block !important;
+    }
+  }
+  .picker-input {
+    cursor: pointer;
+    padding: 0;
+  }
+  button {
+    outline: none;
+    &.btn {
+      background: transparent;
+      border: none;
+      color: $ltgrey;
+      font-size: 12px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+    svg {
+      margin-left: 5px;
+      height: 15px;
+      width: 15px;
+    }
+  }
+  // DropDown
+  .drop-down {
+    display: none;
+    position: absolute;
+    top: 31px;
+    left: 45%;
+    background-color: #1a1b1d;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    color: white;
+    @media screen and (max-width: 520px) {
+      margin-left: -23px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        position: relative;
+        padding: 10px 15px;
+        font-size: 0.944rem;
+        cursor: pointer;
+        .bridge {
+          display: none;
+          position: absolute;
+          opacity: 0;
+          height: 38px;
+          width: 7px;
+          top: 0;
+          left: 75px;
+        }
+        .drop-down-week-picker,
+        .drop-down-day-picker,
+        .drop-down-month-picker {
+          left: 86px; // Distance From Dropdown
+        }
+        .drop-down-week-picker,
+        .drop-down-day-picker {
+          display: none;
+          position: absolute;
+          top: 0;
+          padding-left: 5px;
+        }
+        .drop-down-month-picker {
+          display: none;
+          position: absolute;
+          top: 0;
+          width: 217px;
+          padding-left: 5px;
+          &:hover {
+            display: block !important;
+          }
+        }
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+          .drop-down-month-picker,
+          .drop-down-week-picker,
+          .drop-down-day-picker,
+          .bridge {
+            display: block !important;
+          }
+        }
+      }
+    }
+    &.show-drop-down {
+      display: block !important;
+    }
+  }
+  .arrow-up {
+    position: absolute;
+    top: -10px;
+    left: 50px;
+    width: 0px;
+    height: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #1a1b1d;
+  }
+  .react-datepicker {
+    background-color: #1a1b1d;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    color: white;
+    border: none;
+    transition: 500ms ease-in-out;
+    .react-datepicker__header {
+      background-color: transparent;
+      color: white;
+      border-bottom: none;
+    }
+    // DatePicker Cells
+    .react-datepicker__month .react-datepicker__month-text {
+      padding: 5px 0;
+    }
+    // Navigation Arrows
+    .react-datepicker__navigation--previous {
+      border-right-color: #808d8d !important;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    .react-datepicker__navigation--next {
+      border-left-color: #808d8d !important;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    // On Hover
+    .react-datepicker__month-text.react-datepicker__month--selected:hover,
+    .react-datepicker__month-text.react-datepicker__month--in-range:hover,
+    .react-datepicker__month-text:hover {
+      background-color: rgba(49, 49, 51, 0.7);
+      color: white;
+    }
+    // On Selected Month
+    .react-datepicker__month--selected,
+    .react-datepicker__month--in-selecting-range,
+    .react-datepicker__month--in-range {
+      background: white;
+      color: $dkgrey;
+      &:hover {
+        background: white !important;
+        color: $dkgrey !important;
+        cursor: default;
+      }
+    }
+    // On Disabled
+    .react-datepicker__month--disabled {
+      opacity: 0.3;
+    }
+    // Triangle
+    .react-datepicker-popper[data-placement^="bottom"],
+    .react-datepicker__triangle,
+    .react-datepicker-popper[data-placement^="bottom"],
+    .react-datepicker__triangle::before {
+      border-bottom-color: #1a1b1d !important;
+    }
+    .react-datepicker-popper[data-placement^="bottom"],
+    .react-datepicker__triangle {
+      margin-top: -7px !important;
+    }
+  }
+  // Day Picker
+  .drop-down-day-picker {
+    .DayPicker:not(.DayPicker--interactionDisabled)
+      .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+      color: $dkgrey;
+    }
+  }
+  // Week Picker
+  .picker-wrapper {
+    position: relative;
+    z-index: 999;
+  }
+  .week-picker,
+  .drop-down-week-picker,
+  .drop-down-day-picker {
+    position: absolute;
+    top: 31px;
+    left: 0;
+    .DayPicker {
+      background-color: #1a1b1d;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+    .DayPicker-Month {
+      border-collapse: separate;
+      cursor: default;
+    }
+    // Week Day Abbreviations
+    .DayPicker-WeekNumber,
+    .DayPicker-Weekday {
+      outline: none;
+      border-right: none;
+      font-size: 0.8rem;
+      color: #68686e;
+    }
+    // Each Day Cell
+    .DayPicker-Day {
+      outline: none;
+      border: 1px solid transparent;
+      font-size: 0.8rem;
+      &.DayPicker-Day--disabled {
+        cursor: default;
+        pointer-events: none;
+        color: #4d4d4e;
+      }
+    }
+    // Days Outside Of Month
+    .DayPicker-Day--outside {
+      color: #68686e;
+      &:hover {
+        cursor: default;
+      }
+    }
+    // Hover
+    .DayPicker-Day--hoverRange {
+      border-radius: 0;
+      background-color: rgba(49, 49, 51, 0.7) !important;
+      color: white;
+      &.DayPicker-Day--today {
+        color: #d0021b;
+      }
+    }
+    // Selected Range
+    .DayPicker-Day--selectedRange {
+      border-radius: 0;
+      background-color: white !important;
+      color: $dkgrey !important;
+      cursor: default !important;
+    }
+    .DayPicker-Day--selectedRangeStart {
+      border-top-left-radius: 5px !important;
+      border-bottom-left-radius: 5px !important;
+    }
+    .DayPicker-Day--selectedRangeEnd {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+    .DayPicker-Day--today {
+      color: #d0021b !important;
+    }
+    // Month Navigation
+    .DayPicker-NavButton {
+      outline: none;
+      // height: 10px;
+      // width: 10px;
+    }
+    // Header
+    .DayPicker-Caption > div {
+      font-size: 0.944rem;
+    }
+    // Wrapper
+    .DayPicker-wrapper {
+      outline: none;
+    }
+  }
+  .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+    color: $dkgrey !important;
+    background-color: white !important;
+    &:hover {
+      background-color: white !important;
+    }
+  }
+  .DayPicker:not(.DayPicker--interactionDisabled)
+    .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+    color: white !important;
+    background-color: rgba(49, 49, 51, 0.7) !important;
+  }
+}
+
+// Mobile
+@media screen and (max-width: 700px) {
+  .date-picker {
+    width: 100%;
+    margin: 8px 0;
+    .week-picker {
+      left: 31.1%;
+    }
+    .picker-wrapper {
+      display: flex;
+      justify-content: center;
+      .react-datepicker-popper[data-placement^="bottom"] {
+        transform: translate3d(218px, 19px, 0px) !important;
+      }
+    }
+    .drop-down.show-drop-down {
+      left: 20%;
+    }
+    button.btn {
+      margin: 0 auto;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .date-picker {
+    .week-picker {
+      left: 24.75%;
+    }
+    .picker-wrapper {
+      .react-datepicker-popper[data-placement^="bottom"] {
+        transform: translate3d(167px, 19px, 0px) !important;
+      }
+    }
+    .drop-down.show-drop-down {
+      left: 10%;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .date-picker {
+    .week-picker {
+      left: 14.5%;
+    }
+    .picker-wrapper {
+      .react-datepicker-popper[data-placement^="bottom"] {
+        transform: translate3d(66.5px, 19px, 0px) !important;
+      }
+    }
+    .drop-down.show-drop-down {
+      left: 18px;
+    }
+  }
+}

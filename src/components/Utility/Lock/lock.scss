@@ -1,0 +1,15 @@
+@import '../../../scss/colors';
+
+.lock-component {
+    height: 25px;
+    flex: 1;
+    margin-right: 10px;
+    margin-top: 10px;
+    svg, .button {
+        float: right;
+        cursor: pointer;
+    }
+    svg {
+        margin: 0 10px;
+    }
+}

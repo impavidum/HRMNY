@@ -1,0 +1,50 @@
+@import "../../scss/colors";
+
+.event-by-trigger-object {
+  position: relative;
+  display: flex;
+  height: 100%;
+  .trigger-object-list {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 100%;
+    li {
+      cursor: pointer;
+      list-style-type: none;
+      border-bottom: 1px solid #26252a;
+      padding: 8px 15px;
+      font-size: 15.5px;
+      transition: 100ms ease-in-out;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      a {
+        text-decoration: none;
+      }
+      .name {
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        color: lighten($ltgrey, 50%);
+        width: 90%;
+      }
+      .count {
+        color: $muted;
+        float: right;
+        font-size: 14px;
+      }
+    }
+    .last {
+      border: none;
+    }
+  }
+  .no-results {
+    cursor: default;
+    margin: auto 0;
+    width: 100%;
+    text-align: center;
+    color: $ltgrey;
+  }
+}

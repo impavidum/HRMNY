@@ -1,0 +1,72 @@
+@import "../../scss/colors";
+
+.filter {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  // cursor: not-allowed;
+  z-index: 998 !important;
+  #react-autowhatever-1 {
+    z-index: 999 !important;
+  }
+  .chips-chips {
+    height: calc(100% - 40px);
+    overflow: scroll;
+    transform: translateY(40px);
+    position: relative;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar { width: 0 !important }
+    input {
+      display: none;
+    }
+    div > div {
+      max-height: 18px; // Prevent Height Bug On Chips
+    }
+  }
+  .chips-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: rgba(256, 256, 256, 0.03);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  // div:first-child > div {
+  //   transition: 100ms ease-in-out;
+  //   &:last-child > div {
+  //     cursor: pointer !important;
+  //     pointer-events: auto !important;
+  //   }
+  // }
+  &.disabled {
+    cursor: progress;
+    div:first-child > div {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .chips-input {
+      cursor: not-allowed;
+      pointer-events: none;
+      input {
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+    }
+  }
+  .gradient-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 15px;
+    background-image: linear-gradient(180deg, rgba(45, 45, 47, 0.1) 0%, rgba(45, 45, 47, 1) 50%, rgba(45, 45, 47, 1) 100%);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+}

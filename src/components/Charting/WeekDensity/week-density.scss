@@ -1,0 +1,72 @@
+@import '../../../scss/variables';
+
+.week-density {
+    height: 100%;
+    // height: 625px;
+    width: 100%;
+    position: relative;
+    // Desktop
+    .filter-desktop {
+        display: none;
+        width: 480px;
+        // height: 450px;
+        padding: 10px;
+    }
+    .chart-desktop {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        // left: 500px;
+        left: 0px;
+        border-radius: 5px;
+    }
+
+
+    // Mobile
+    .chart-mobile {
+        @extend .chart-desktop;
+        display: none;
+    }
+    .filter-mobile {
+        @extend .filter-desktop;
+        display: none;
+    }
+
+    // @media screen and (max-width: $break-md) {
+    //     // height: auto !important;
+    //     .chart-mobile,.filter-mobile {
+    //         display: block !important;
+    //         position: relative;
+    //     }
+    //     .chart-mobile {
+    //         height: 900px;
+    //         left: unset;
+    //     }
+        
+    //     .filter-mobile {
+    //         width: calc(100% - 20px) !important;
+    //         .chart-filter {
+    //             width: calc(100% - 20px);
+    //             bottom: 413px;
+    //         }
+    //     }
+    // }
+
+    // @media screen and (min-width: $break-md) and (max-width: $break-lg) {
+    //     .chart-filter {
+    //         bottom: 844px;
+    //     }
+    // }
+
+    @media screen and (max-width: $break-md) {
+        // height: auto;
+        // min-height: 900px;
+        .chart-mobile,.filter-mobile {
+            display: block !important;
+        }
+        .chart-desktop,.filter-desktop {
+            display: none;
+        }
+    }
+}

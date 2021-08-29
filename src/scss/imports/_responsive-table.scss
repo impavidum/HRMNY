@@ -1,0 +1,160 @@
+@import "../colors";
+
+/* DOCS HERE: https://github.com/ua-oira/react-super-responsive-table */
+/* inspired by: https://css-tricks.com/responsive-data-tables/ */
+.responsiveTable {
+  width: 100%;
+}
+
+.responsiveTable td .tdBefore {
+  display: none;
+}
+
+.responsiveTable td {
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 20%;
+  text-overflow: ellipsis;
+  .neutralize {
+    display: inline-block;
+    // width: 34%;
+    &.node {
+      width: auto;
+      max-width: calc(64% - 30px);
+    }
+  }
+  span {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: auto 0;
+    transform: translateY(7px);
+    &.node {
+      max-width: 694px;
+    }
+    &.name {
+      max-width: 90%;
+    }
+    &.space-around {
+      margin: auto 10px;
+      color: $ltgrey;
+    }
+    // &.full-string {
+    //   display: none;
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   background-color: rgba(0, 0, 0, 0.1);
+    //   border-radius: 5px;
+    //   border: 1px solid white;
+    //   color: white;
+    //   &.show {
+    //     display: block;
+    //   }
+    // }
+  }
+}
+
+@media screen and (min-width: 1231px) and (max-width: 1700px) {
+  .responsiveTable td {
+    span.node {
+      max-width: 379px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .responsiveTable td {
+    span.node {
+      max-width: 160px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  .responsiveTable td {
+    span.name {
+      max-width: 160px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .responsiveTable td {
+    span.name {
+      max-width: 140px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 762px) {
+  /*
+      Force table elements to not behave like tables anymore
+      Hide table headers (but not display: none;, for accessibility)
+    */
+
+  .responsiveTable table,
+  .responsiveTable thead,
+  .responsiveTable tbody,
+  .responsiveTable th,
+  .responsiveTable td,
+  .responsiveTable tr {
+    display: block;
+  }
+
+  .responsiveTable thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    border-bottom: 2px solid #333;
+  }
+
+  .responsiveTable tbody tr {
+    border-bottom: 1px solid #26252a;
+  }
+
+  .responsiveTable td.pivoted {
+    /* Behave like a "row" */
+    border: none !important;
+    position: relative;
+    width: calc(100% - 128px);
+    padding-left: 118px !important;
+    padding-right: 10px;
+    text-align: left !important;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    span {
+      transform: unset;
+      display: inline-block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin: auto 0;
+      &.name {
+        max-width: 300px;
+      }
+      &.node {
+        max-width: 150px;
+      }
+      &.space-around {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  .responsiveTable td .tdBefore {
+    /* Now like a table header */
+    position: absolute;
+    display: block;
+    font-weight: normal;
+    color: $ltgrey;
+    font-size: 14px;
+
+    /* Top/left values mimic padding */
+    left: 19px;
+    width: calc(50% - 20px);
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    text-align: left !important;
+  }
+}

@@ -1,0 +1,14 @@
+
+.week-bar {
+    flex: 1;
+    z-index: 999;
+    top: 40px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    position: absolute;
+    z-index: 999;
+    canvas {
+       height: 270px !important;
+    }
+}

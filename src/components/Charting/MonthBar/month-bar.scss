@@ -1,0 +1,45 @@
+@import "../../../scss/variables";
+
+.month-bar {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  // Desktop
+  .filter-desktop {
+    width: 480px;
+    height: 450px;
+    padding: 10px;
+  }
+  .chart-desktop {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0px;
+  }
+
+  .chart-mobile-2,
+  .chart-mobile {
+      display: none;
+  }
+
+  @media screen and (max-width: $break-md) {
+    height: auto;
+    // min-height: 900px;
+    .chart-mobile {
+      display: block !important;
+    }
+    .chart-desktop{
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: $break-sm) {
+    .chart-mobile-2 {
+      display: block !important;
+    }
+    .chart-mobile {
+      display: none !important;
+    }
+  }
+}
